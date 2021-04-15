@@ -2,6 +2,7 @@ package br.com.hotel.rede.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -10,9 +11,9 @@ import javax.persistence.OneToOne;
 public class Hotel extends BaseModel {
 
 	private String nome;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
-	@OneToMany (mappedBy = "hotel")
+	@OneToMany (mappedBy = "hotel", cascade = CascadeType.ALL)
 	private List<Quarto> quartos;
 	
 
