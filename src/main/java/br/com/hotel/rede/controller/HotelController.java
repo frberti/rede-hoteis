@@ -48,6 +48,7 @@ public class HotelController {
 	@DeleteMapping("/{id}")
 	public void remove (@PathVariable Long id) {
 		System.out.println("removendo hotel" + id);
+		hotelRepository.deleteById(id);
 	}
 	
 
