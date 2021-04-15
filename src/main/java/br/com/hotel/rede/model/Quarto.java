@@ -2,20 +2,27 @@ package br.com.hotel.rede.model;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Quarto extends BaseModel {
 
 	private String numero;
 	private TipoQuartoEnum tipo;
 	private float valor;
+	@ManyToOne
 	private Hotel hotel;
-	private List<Reserva> reserva;
+	@OneToMany(mappedBy = "quarto")
+	private List<Reserva> reservas;
 
-	public List<Reserva> getReserva() {
-		return reserva;
+	public List<Reserva> getReservas() {
+		return reservas;
 	}
 
-	public void setReserva(List<Reserva> reserva) {
-		this.reserva = reserva;
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
 	}
 
 	public String getNumero() {
@@ -53,9 +60,7 @@ public class Quarto extends BaseModel {
 	@Override
 	public String toString() {
 		return "Quarto [numero=" + numero + ", tipo=" + tipo + ", valor=" + valor + ", hotel=" + hotel + ", reserva="
-				+ reserva + "]";
+				+ reservas + "]";
 	}
-	
-	
 
 }

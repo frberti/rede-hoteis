@@ -1,5 +1,8 @@
 package br.com.hotel.rede.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Endereco extends BaseModel{
 
 	private String rua;
