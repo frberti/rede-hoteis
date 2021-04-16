@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import br.com.hotel.rede.dto.QuartoDto;
+
 @Entity
 public class Quarto extends BaseModel {
 
@@ -16,6 +18,22 @@ public class Quarto extends BaseModel {
 	private Hotel hotel;
 	@OneToMany(mappedBy = "quarto")
 	private List<Reserva> reservas;
+	
+	public Quarto(QuartoDto quartoDto) {
+		
+		this.numero = quartoDto.getNumero();
+		this.tipo = quartoDto.getTipo();
+		this.valor = quartoDto.getValor();
+		
+		Hotel hotel = new Hotel();
+		hotel.setId(quartoDto.getHotelId());
+		this.hotel = hotel;
+		
+	}
+	
+	public Quarto() {
+		
+	}
 
 	public List<Reserva> getReservas() {
 		return reservas;
