@@ -1,56 +1,48 @@
-package br.com.hotel.rede.controller;
+package br.com.hotel.rede.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import br.com.hotel.rede.model.Quarto;
 import br.com.hotel.rede.repository.QuartoRepository;
-import br.com.hotel.rede.service.QuartoService;
 
-@RestController
-@RequestMapping("/quarto")
-public class QuartoController {
+@Service
+public class QuartoService {
 	
 	@Autowired
-	QuartoService quartoService;
+	QuartoRepository quartoRepository;
 	
-	@GetMapping
+	
 	public List<Quarto> buscar() {
 		System.out.println("buscando quarto");
-		return quartoService.buscar();
+		return quartoRepository.findAll();
 	}
 	
-	@GetMapping("/{id}")
-	public Quarto buscarPorId(@PathVariable Long id) {
+	public Quarto buscarPorId(Long id) {
 		System.out.println("buscando quarto por id: " + id);
-		return quartoService.buscarPorId(id);
+		return quartoRepository.findById(id).get();
 	}
 	
-	@PostMapping
-	public void gravar(@RequestBody Quarto quarto) {
+	public void gravar(Quarto quarto) {
 		System.out.println("gravando quarto: " + quarto);
-		quartoService.gravar(quarto);
+		quartoRepository.save(quarto);
 	}
 	
-	@PutMapping("/{id}")
-	public void atualiza(@RequestBody Quarto quarto, @PathVariable Long id) {
+	public void atualiza(Quarto quarto, @PathVariable Long id) {
 		System.out.println("atualizando quarto: " + id);
-		quartoService.atualiza(quarto, id);
 	}
 	
-	@DeleteMapping("/{id}")
-	public void remove(@PathVariable Long id) {
+	public void remove(Long id) {
 		System.out.println("removendo quarto: " + id);
-		quartoService.remove(id);
+		quartoRepository.deleteById(id);
 	}
 
 }

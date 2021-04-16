@@ -17,43 +17,44 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.hotel.rede.model.BaseModel;
 import br.com.hotel.rede.model.Reserva;
 import br.com.hotel.rede.repository.ReservaRepository;
+import br.com.hotel.rede.service.ReservaService;
 
 @RestController
 @RequestMapping("/reserva")
 public class ReservaController extends BaseModel {
-	
+
 	@Autowired
-	ReservaRepository reservaRepository;
-	
+	ReservaService reservaService;
+
 	@GetMapping
 	List<Reserva> reserva() {
 		System.out.println("buscando lista de reservas: ");
-		return reservaRepository.findAll();
+		return reservaService.reserva();
 	}
-	
+
 	@GetMapping("/{id}")
 	public Reserva buscarPorId(@PathVariable Long id) {
 		System.out.println("buscando reserva por id: " + id);
-		return reservaRepository.findById(id).get();
+		return reservaService.buscarPorId(id);
 	}
-	
+
 	@PostMapping
 	public void gravar(@RequestBody Reserva reserva) {
 		System.out.println("gravando uma reserva: " + reserva);
-		reservaRepository.save(reserva);
+		reservaService.gravar(reserva);
 	}
-	
+
 	@PutMapping("/{id}")
 	public void atualizar(@PathVariable Long id, @RequestBody Reserva reserva) {
 		System.out.println("atualizando uma reserva: " + reserva + " : " + id);
+		reservaService.atualizar(id, reserva);
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public void remove (@PathVariable Long id){
+	public void remove(@PathVariable Long id) {
 		System.out.println("removendo uma reserva: " + id);
-		reservaRepository.deleteById(id);
+		reservaService.remove(id);
+		
 	}
-	
-	
 
 }
