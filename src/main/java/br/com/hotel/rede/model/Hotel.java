@@ -4,8 +4,12 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import br.com.hotel.rede.dto.EnderecoDto;
+import br.com.hotel.rede.dto.HotelDto;
 
 @Entity
 public class Hotel extends BaseModel {
@@ -13,9 +17,18 @@ public class Hotel extends BaseModel {
 	private String nome;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
-	@OneToMany (mappedBy = "hotel", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
 	private List<Quarto> quartos;
+
+	public Hotel(HotelDto hotelDto) {
+		this.nome = hotelDto.getNome();
+		this.endereco = EnderecoDto.converte(hotelDto.getEnderecoDto());
+
+	}
 	
+	public Hotel() {
+		
+	}
 
 	public List<Quarto> getQuartos() {
 		return quartos;
@@ -45,7 +58,5 @@ public class Hotel extends BaseModel {
 	public String toString() {
 		return "Hotel [nome=" + nome + ", endereco=" + endereco + ", quartos=" + quartos + "]";
 	}
-	
-	
 
 }
