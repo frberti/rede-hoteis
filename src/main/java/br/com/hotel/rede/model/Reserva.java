@@ -25,8 +25,21 @@ public class Reserva extends BaseModel {
 		return dataFim;
 	}
 
+	public Quarto getQuarto() {
+		return quarto;
+	}
+
+	public void setQuarto(Quarto quarto) {
+		this.quarto = quarto;
+	}
+
 	public void setDataFim(LocalDateTime dataFim) {
 		this.dataFim = dataFim;
+	}
+
+	@Override
+	public String toString() {
+		return "Reserva [dataInicio=" + dataInicio + ", dataFim=" + dataFim + ", quarto=" + quarto + "]";
 	}
 
 }

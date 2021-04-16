@@ -59,8 +59,10 @@ public class Quarto extends BaseModel {
 
 	@Override
 	public String toString() {
-		return "Quarto [numero=" + numero + ", tipo=" + tipo + ", valor=" + valor + ", hotel=" + hotel + ", reserva="
-				+ reservas + "]";
+		return "Quarto [numero=" + numero + ", tipo=" + tipo + ", valor=" + valor + ", hotel=" + hotel + ", reservas="
+				+ reservas + ", id=" + id + "]";
 	}
+
+
 
 }
