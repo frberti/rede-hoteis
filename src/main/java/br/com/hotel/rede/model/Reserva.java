@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+import br.com.hotel.rede.dto.ReservaDto;
+
 @Entity
 public class Reserva extends BaseModel {
 
@@ -12,6 +14,20 @@ public class Reserva extends BaseModel {
 	private LocalDateTime dataFim;
 	@ManyToOne
 	private Quarto quarto;
+	
+	public Reserva (ReservaDto reservaDto) {
+		this.dataInicio = reservaDto.getDataInicio();
+		this.dataFim = reservaDto.getDataFim();
+		
+		Quarto quarto = new Quarto();
+		quarto.setId(reservaDto.getQuartoId());
+		this.quarto = quarto;
+		
+	}
+	
+	public Reserva() {
+		
+	}
 
 	public LocalDateTime getDataInicio() {
 		return dataInicio;
