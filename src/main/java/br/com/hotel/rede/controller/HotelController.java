@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.hotel.rede.dto.HotelCompletoDto;
 import br.com.hotel.rede.dto.HotelDto;
 import br.com.hotel.rede.model.Hotel;
 import br.com.hotel.rede.repository.HotelRepository;
@@ -25,12 +26,20 @@ public class HotelController {
 	HotelService hotelService;
 
 	@GetMapping
-	public List<HotelDto> buscar() {
+	public List<? extends HotelDto> buscar() {
 		System.out.println("buscando hoteis");
 		List<Hotel> hoteis = hotelService.buscar();
-		List<HotelDto> converte = HotelDto.converte(hoteis);
+		List<? extends HotelDto> converte = HotelDto.converte(hoteis);
 		return converte;
 	}
+	
+	@GetMapping("/completo")
+	public List<HotelCompletoDto> buscarHoteisComQuarto(){
+		List<Hotel> hoteisComQuartos = hotelService.buscarHoteisComQuarto();
+		List<HotelCompletoDto> converte = HotelCompletoDto.converte(hoteisComQuartos);
+		return converte;
+	}
+	
 
 	@GetMapping("/{id}")
 	public HotelDto buscarPorId(@PathVariable Long id) {

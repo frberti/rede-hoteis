@@ -3,13 +3,16 @@ package br.com.hotel.rede.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import br.com.hotel.rede.model.Endereco;
 import br.com.hotel.rede.model.Hotel;
 
 public class HotelDto extends BaseDto {
 	
 	private String nome;
-	private EnderecoDto enderecoDto;
+	private EnderecoDto enderecoDto;	
+	HotelCompletoDto hotelCompletoDto;
 	
 	public HotelDto(String nome, Endereco endereco, Long id) {
 		
@@ -26,7 +29,7 @@ public class HotelDto extends BaseDto {
 		return enderecoDto;
 	}
 	
-	public static List<HotelDto> converte(List<Hotel> hoteis) {
+	public static List<? extends HotelDto> converte(List<Hotel> hoteis) {
 		
 		List<HotelDto> hoteisDto = new ArrayList<HotelDto>();
 		

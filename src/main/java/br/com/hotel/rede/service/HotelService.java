@@ -19,6 +19,11 @@ public class HotelService {
 		System.out.println("buscando hoteis");
 		return hotelRepository.findAll();
 	}
+	
+	public List<Hotel> buscarHoteisComQuarto() {
+		System.out.println("buscando hoteis");
+		return hotelRepository.buscarHoteisComQuartos();
+	}
 
 	
 	public Hotel buscarPorId(Long id) {

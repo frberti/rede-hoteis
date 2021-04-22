@@ -1,6 +1,7 @@
 package br.com.hotel.rede.model;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -18,7 +19,7 @@ public class Hotel extends BaseModel {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
 	@OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
-	private List<Quarto> quartos;
+	private Set<Quarto> quartos;
 
 	public Hotel(HotelDto hotelDto) {
 		this.nome = hotelDto.getNome();
@@ -30,11 +31,11 @@ public class Hotel extends BaseModel {
 		
 	}
 
-	public List<Quarto> getQuartos() {
+	public Set<Quarto> getQuartos() {
 		return quartos;
 	}
 
-	public void setQuartos(List<Quarto> quartos) {
+	public void setQuartos(Set<Quarto> quartos) {
 		this.quartos = quartos;
 	}
 
